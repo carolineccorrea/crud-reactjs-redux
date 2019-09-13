@@ -1,33 +1,50 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../../actions';
 
 
-const Customer = ( cliente ) => (
+const Customer = ({customer}) => (
     <div>
-        <p>{cliente.nome}</p>
-        <p>{cliente.email}</p>
-        <p>{cliente.telefone}</p>
+        {customer.nome}&emsp;
+        {customer.email}&emsp;
+        {customer.telefone}&emsp;
         
     </div>
 )
+
+
 class CustomersList extends Component {
+    componentDidMount(){
+		this.props.getCustomers();
+    }
+    organizar = (a, b) => {
+		const { ordenacao } = this.props
+		if( ordenacao === 'a-z' ) return a.nome.localeCompare(b.nome)
+		else if( ordenacao === 'z-a' ) return -1 * a.nome.localeCompare(b.nome)
+		//else if( ordenacao === 'criacao' ) return new Date(a.criadoEm) - new Date(b.criadoEm)
+	}
     render() {
-        const {data} = this.props
+        const {customers: data} = this.props
+        console.log(data);
         return (
             <div className="ListaClientes">
 
                 <table>
                     <thead>
                         <tr>
-                            <th>Nome</th>
-                            <th>Email</th>
-                            <th>Telefone</th>
+                            <strong>
+                            Nome&emsp;
+                            email&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                            Telefone&emsp;&emsp;
+                            </strong>
+                            
                         </tr>
                     </thead>
 
               <tbody>
 
                 {
-                    data.map((customer,index)=>(
+                    (data || []).map((customer,index)=>(
                         <Customer customer={customer} key={index}/>
                     ))
                 }
@@ -39,4 +56,10 @@ class CustomersList extends Component {
     }
 }
 
-export default CustomersList;
+const mapStateToProps = state => (
+    {customers: state.customers.customers, 
+     ordenacao: state.customers.ordenacao   
+    } // customers1 vem do reducer e customers2 vem do props
+)
+
+export default connect(mapStateToProps,actions)(CustomersList);

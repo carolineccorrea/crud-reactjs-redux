@@ -1,17 +1,8 @@
 import { combineReducers } from 'redux';
-import { ADICIONAR_UM } from '../actions/types';
-
-const valoresReducer = (state={valor:1},action) =>{
-    switch (action.type){
-        case ADICIONAR_UM :
-            return {...state, valor: state.valor + 1}
-        default:
-            return state;
-    }
-}
+import customersReducer from './customersReducer';
 
 const rootReducer = combineReducers({
-    valores: valoresReducer
+	customers: customersReducer
 })
 
 export default rootReducer;

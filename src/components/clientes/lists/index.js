@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Search from './search';
+//import Search from './search';
 import Order from './order';
-import Form from '../forms';
+//import Form from '../forms';
 import CustomersList from './customersList'
 
 
@@ -12,7 +12,7 @@ const Options = () => (
         <Order/>
     </div>
     <div>
-        <Search/>
+        {/*<Search/>*/}
     </div>
 
 </div>
@@ -27,8 +27,8 @@ class Lists extends Component {
                 </div>
                 <hr/>
                     <Options/>
+                    {/*<Form/>*/}
                     <CustomersList/>
-                    <Form/>
                     
             </div>
         );

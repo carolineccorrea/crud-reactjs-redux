@@ -1,13 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../../actions';
 
-class Order extends Component {
-    render() {
-        return (
-            <div>
-                
-            </div>
-        );
-    }
+class Ordenacao extends React.Component {
+
+	render(){
+		const { ordenacao: valor } = this.props
+		return (
+			<div className="Ordenacao">
+				<label>Ordenar por </label>
+				<select
+					value={valor || "a-z"}
+					onChange={this.props.setOrdenacao} >
+					<option value="a-z">Alfabética de A-Z</option>
+					<option value="z-a">Alfabética de Z-A</option>
+					<option value="criacao">Data de criação</option>
+				</select>
+			</div>
+		)
+	}
 }
 
-export default Order;
+const mapStateToProps = state => ({
+	ordenacao: state.customers.ordenacao
+})
+
+export default connect(mapStateToProps, actions)(Ordenacao);
