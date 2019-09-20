@@ -9,6 +9,7 @@ const Customer = ({customer}) => (
         {customer.email}&emsp;
         {customer.telefone}&emsp;
         
+        
     </div>
 )
 
@@ -30,7 +31,8 @@ class CustomersList extends Component {
             <div className="ListaClientes">
 
                 <table>
-                    <thead>
+                    <tbody>
+                    
                         <tr>
                             <strong>
                             Nome&emsp;
@@ -39,15 +41,17 @@ class CustomersList extends Component {
                             </strong>
                             
                         </tr>
-                    </thead>
+                    
 
-              <tbody>
+              
 
                 {
                     (data || []).map((customer,index)=>(
                         <Customer customer={customer} key={index}/>
                     ))
+                    
                 }
+                
 
               </tbody>
                     </table>                
